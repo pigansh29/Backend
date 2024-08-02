@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg,#153677,#4e085f);
+            margin: 0;
+            font-family: "Bebas Neue", sans-serif;
+        }
+        .stopwatch {
+            text-align: center;
+            color: #ecf0f1;
+        }
+        .time {
+            font-size: 5em;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.5em;
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s
+        }
+        button:hover {
+            background-color: #2980b9; 
+            transform: scale(1.1);
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="stopwatch">
+        <div class="time" id="display">00:00:00</div>
+        <div class="controls">
+            <button onclick="startStopwatch()">Start</button>
+            <button onclick="stopStopwatch()">Stop</button>
+            <button onclick="resetStopwatch()">Reset</button>
+        </div>
+    </div>
+    <script>
+        let timer;
+        let elapsed = 0;
+        let running = false;
+
+        function updateDisplay() {
+            const hours = Math.floor(elapsed / 3600);
+            const minutes = Math.floor((elapsed % 3600) / 60);
+            const seconds = elapsed % 60;
+
+            const displayHours = hours < 10 ? '0' + hours : hours;
+            const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const displaySeconds = seconds < 10 ? '0' + seconds : seconds;
+
+            document.getElementById('display').textContent = `${displayHours}:${displayMinutes}:${displaySeconds}`;
+        }
+
+        function startStopwatch() {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    elapsed++;
+                    updateDisplay();
+                }, 1000);
+            }
+        }
+
+        function stopStopwatch() {
+            if (running) {
+                running = false;
+                clearInterval(timer);
+            }
+        }
+
+        function resetStopwatch() {
+            running = false;
+            clearInterval(timer);
+            elapsed = 0;
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
