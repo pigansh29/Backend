@@ -15,9 +15,6 @@ app.use(morgan("dev"));
 app.use(express.json());       //whenever app.use it means u are writing middlewares
 
 app.use(express.static(path.resolve(__dirname,'./public')))
-
-
-
 // localhost : 8000
 const data = [
     {
