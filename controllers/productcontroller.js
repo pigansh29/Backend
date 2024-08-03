@@ -13,6 +13,6 @@ const productcontroller=(req,res)=>{
     else{
         res.send(products)
     }
-    console.log("Hello")
+    console.log("Hello");
 }
 module.exports=productcontroller;
